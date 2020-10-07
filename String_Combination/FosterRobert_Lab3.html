@@ -1,0 +1,154 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>FosterRobert_Lab3</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-16"><meta name="DC.source" content="FosterRobert_Lab3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%Assignment : Assignment 3 part one</span>
+<span class="comment">%Description A program that works with strings, then it combines them</span>
+<span class="comment">%to come up with the ending sentence, working with punctuation along</span>
+<span class="comment">%s the way</span>
+<span class="comment">%Author : Robert J. Foster</span>
+<span class="comment">%Date : September 16th, 2019</span>
+<span class="comment">%Resources : Matlab for Engineers Book, www.mathworks.com/help</span>
+<span class="comment">%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html</span>
+
+<span class="comment">%Question Number One</span>
+harder = <span class="string">"harder"</span>;
+life = <span class="string">"better"</span>;
+faster = <span class="string">"faster"</span>;
+stronger= <span class="string">"stronger"</span>;
+
+<span class="comment">%Question Number Two</span>
+fprintf(<span class="string">"Matlab makes my life %s.\n"</span>,harder);
+fprintf(<span class="string">"Matlab makes my life %s.\n"</span>,life);
+fprintf(<span class="string">"Matlab makes my life %s.\n"</span>,faster);
+fprintf(<span class="string">"Matlab makes my life %s.\n"</span>,stronger);
+combination = harder + <span class="string">", "</span> +life + <span class="string">", "</span> + faster + <span class="string">", "</span> + stronger;
+fprintf(<span class="string">"Matlab makes my life %s.\n"</span>,combination);
+
+<span class="comment">%Question Number Three</span>
+
+<span class="comment">%c for characters, best way to convert numbers</span>
+<span class="comment">%/ strings to the ASCII format 1 &#8211; 127</span>
+<span class="comment">%1.	! " # $ % &amp; ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 :</span>
+<span class="comment">%; &lt; = &gt; ?</span>
+<span class="comment">%2.	@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</span>
+<span class="comment">%[ \ ] ^ _' a b c d e f g h i j k l m n o p q r s t u v w x y z { | } ~</span>
+
+<span class="comment">%d for decimals, as integers work with whole numbers and will always</span>
+<span class="comment">%round down, you can use %d to indicate that you want to instantiate decimals</span>
+<span class="comment">%f will be to used to indicate that you want to do a floating point. So</span>
+<span class="comment">%instead of taking up as much space until it reaches the datatypes maximum space.</span>
+<span class="comment">%You can indicate how many numbers before or after the decimal you want to</span>
+<span class="comment">%use by %f then . with a number before or after to indicate how many numbers.</span>
+</pre><pre class="codeoutput">Matlab makes my life harder.
+Matlab makes my life better.
+Matlab makes my life faster.
+Matlab makes my life stronger.
+Matlab makes my life harder, better, faster, stronger.
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%Assignment : Assignment 3 part one
+%Description A program that works with strings, then it combines them
+%to come up with the ending sentence, working with punctuation along
+%s the way
+%Author : Robert J. Foster
+%Date : September 16th, 2019
+%Resources : Matlab for Engineers Book, www.mathworks.com/help
+%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html
+
+%Question Number One 
+harder = "harder";
+life = "better";
+faster = "faster";
+stronger= "stronger";
+
+%Question Number Two
+fprintf("Matlab makes my life %s.\n",harder);
+fprintf("Matlab makes my life %s.\n",life);
+fprintf("Matlab makes my life %s.\n",faster);
+fprintf("Matlab makes my life %s.\n",stronger);
+combination = harder + ", " +life + ", " + faster + ", " + stronger;
+fprintf("Matlab makes my life %s.\n",combination);
+
+%Question Number Three
+
+%c for characters, best way to convert numbers 
+%/ strings to the ASCII format 1 – 127
+%1.	! " # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : 
+%; < = > ?
+%2.	@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+%[ \ ] ^ _' a b c d e f g h i j k l m n o p q r s t u v w x y z { | } ~
+
+%d for decimals, as integers work with whole numbers and will always 
+%round down, you can use %d to indicate that you want to instantiate decimals 
+%f will be to used to indicate that you want to do a floating point. So 
+%instead of taking up as much space until it reaches the datatypes maximum space. 
+%You can indicate how many numbers before or after the decimal you want to 
+%use by %f then . with a number before or after to indicate how many numbers.
+
+##### SOURCE END #####
+--></body></html>

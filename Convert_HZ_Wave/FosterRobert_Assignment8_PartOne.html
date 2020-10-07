@@ -1,0 +1,202 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>FosterRobert_Assignment8_PartOne</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-27"><meta name="DC.source" content="FosterRobert_Assignment8_PartOne.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%Assignment : Assignment 8 part one</span>
+<span class="comment">%Author : Robert J. Foster</span>
+<span class="comment">%Date : October 27th, 2019</span>
+<span class="comment">%Resources : Matlab for Engineers Book, www.mathworks.com/help</span>
+<span class="comment">%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html</span>
+<span class="comment">% A program that loads gait stats from an excel file and splits them up</span>
+<span class="comment">% from all the numbers, to the headers, to the raw data.</span>
+<span class="comment">% With these numbers it determines the highest number for the left side for</span>
+<span class="comment">% each.</span>
+<span class="comment">%Then it determines which one has the highest gait ability.</span>
+
+<span class="comment">% 1.Load in the two spreadsheets 'PD' and 'HE' from this excel file.</span>
+<span class="comment">% You need to upload 'everything' (i.e., numbers, headers, and raw data).</span>
+<span class="comment">% You will need to load the data from each spreadsheet within different files.</span>
+
+[PD,PDheaders,PDraw]=xlsread(<span class="string">'DualTask_Timeseries.xlsx'</span>,<span class="string">'PD'</span>);
+[HE,HEheaders,HEraw]=xlsread(<span class="string">'DualTask_Timeseries.xlsx'</span>,<span class="string">'HE'</span>);
+
+<span class="comment">% 2. Create two new matrix 'PD_baseline_ST_left' and 'HE_baseline_ST_left'</span>
+<span class="comment">% that contains the first 400 data the left side of each participant from the</span>
+<span class="comment">% PD group and HE group, respectively. USE A 'FOR' LOOP.[20 pts]</span>
+
+<span class="comment">% (HE) Confused by the question, there's 2 left per participants, this one</span>
+<span class="comment">% commented out would be for the 2 lefts per participant</span>
+<span class="comment">% for i=2:2:((size(HE,2)))</span>
+<span class="comment">%     HE_baseline_ST_left(:,i)=HE(1:400,i)</span>
+<span class="comment">% end</span>
+
+<span class="comment">%(HE)This one would be for one baseline per participant depending on the name</span>
+<span class="comment">%since baseline is in the name, I assume that it's about the baseline</span>
+<span class="keyword">for</span> i=2:4:((size(HE,2)))
+    HE_baseline_ST_left(:,i)=HE(1:400,i);
+<span class="keyword">end</span>
+
+<span class="comment">% (PD) Confused by the question, there's 2 left per participants, this one</span>
+<span class="comment">% commented out would be for the 2 lefts per participant</span>
+<span class="comment">% for i=2:2:((size(PD,2)))</span>
+<span class="comment">%    PD_baseline_ST_left(:,i)=PD(1:400,i)</span>
+<span class="comment">% end</span>
+
+<span class="comment">%(PD)This one would be for one baseline per participant depending on the name</span>
+<span class="comment">%since baseline is in the name, I assume that it's about the baseline</span>
+<span class="keyword">for</span> i=2:4:((size(PD,2)))
+   PD_baseline_ST_left(:,i)=PD(1:400,i);
+<span class="keyword">end</span>
+
+<span class="comment">% 3 . Which group presents the highest gait variability, i.e., the greater standard</span>
+<span class="comment">% deviation of stride intervals?</span>
+
+HEconversion = nanmean(nanstd(HE_baseline_ST_left))
+PDconversion = nanmean(nanstd(PD_baseline_ST_left))
+
+<span class="keyword">if</span>(HEconversion &gt; PDconversion)
+    disp(<span class="string">"HE is higher"</span>)
+<span class="keyword">else</span>
+    disp(<span class="string">"PD is higher"</span>)
+<span class="keyword">end</span>
+
+<span class="comment">%PD is higher</span>
+</pre><pre class="codeoutput">
+HEconversion =
+
+    0.0042
+
+
+PDconversion =
+
+    0.0058
+
+PD is higher
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%Assignment : Assignment 8 part one
+%Author : Robert J. Foster
+%Date : October 27th, 2019
+%Resources : Matlab for Engineers Book, www.mathworks.com/help
+%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html
+% A program that loads gait stats from an excel file and splits them up 
+% from all the numbers, to the headers, to the raw data.
+% With these numbers it determines the highest number for the left side for
+% each.
+%Then it determines which one has the highest gait ability.
+
+% 1.Load in the two spreadsheets 'PD' and 'HE' from this excel file. 
+% You need to upload 'everything' (i.e., numbers, headers, and raw data). 
+% You will need to load the data from each spreadsheet within different files.
+
+[PD,PDheaders,PDraw]=xlsread('DualTask_Timeseries.xlsx','PD');
+[HE,HEheaders,HEraw]=xlsread('DualTask_Timeseries.xlsx','HE');
+
+% 2. Create two new matrix 'PD_baseline_ST_left' and 'HE_baseline_ST_left' 
+% that contains the first 400 data the left side of each participant from the 
+% PD group and HE group, respectively. USE A 'FOR' LOOP.[20 pts]
+
+% (HE) Confused by the question, there's 2 left per participants, this one
+% commented out would be for the 2 lefts per participant
+% for i=2:2:((size(HE,2)))
+%     HE_baseline_ST_left(:,i)=HE(1:400,i)
+% end
+
+%(HE)This one would be for one baseline per participant depending on the name
+%since baseline is in the name, I assume that it's about the baseline
+for i=2:4:((size(HE,2)))
+    HE_baseline_ST_left(:,i)=HE(1:400,i);
+end
+
+% (PD) Confused by the question, there's 2 left per participants, this one
+% commented out would be for the 2 lefts per participant
+% for i=2:2:((size(PD,2)))
+%    PD_baseline_ST_left(:,i)=PD(1:400,i)
+% end
+
+%(PD)This one would be for one baseline per participant depending on the name
+%since baseline is in the name, I assume that it's about the baseline
+for i=2:4:((size(PD,2)))
+   PD_baseline_ST_left(:,i)=PD(1:400,i);
+end
+
+% 3 . Which group presents the highest gait variability, i.e., the greater standard 
+% deviation of stride intervals? 
+
+HEconversion = nanmean(nanstd(HE_baseline_ST_left))
+PDconversion = nanmean(nanstd(PD_baseline_ST_left))
+
+if(HEconversion > PDconversion)
+    disp("HE is higher")
+else
+    disp("PD is higher")
+end
+
+%PD is higher
+
+##### SOURCE END #####
+--></body></html>

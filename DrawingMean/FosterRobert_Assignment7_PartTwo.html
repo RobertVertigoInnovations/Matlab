@@ -1,0 +1,333 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>FosterRobert_Assignment7_PartTwo</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-13"><meta name="DC.source" content="FosterRobert_Assignment7_PartTwo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%Assignment : Assignment 7 part two</span>
+<span class="comment">%Author : Robert J. Foster</span>
+<span class="comment">%Date : October 12th, 2019</span>
+<span class="comment">%Resources : Matlab for Engineers Book, www.mathworks.com/help</span>
+<span class="comment">%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html</span>
+<span class="comment">%A program that takes the data along constant means and std then plots it</span>
+<span class="comment">%on the first gui. Once this is plotted it will then clean it up with a</span>
+<span class="comment">%window of 5 and print it in a new gui. Adding a std of 2 above and below</span>
+<span class="comment">%each recorded mean.</span>
+<span class="comment">%legend({'Noise','+2 STD','Mean','-2 STD'},'AutoUpdate','off','Location','bestoutside','Position',[.0 .4 .2 .4],'color','none');</span>
+
+
+
+
+
+<span class="comment">%Closing the data, loading the data to reduce on tic toc time, setting data</span>
+<span class="comment">%to data, setting the window movement time by 5.</span>
+close <span class="string">all</span>
+load(<span class="string">'E:\Winter 2019 Semester\Matlab2200\Assignment6\Supplementary Data S1.mat'</span>);
+data = Data.StrideTimeIntervals_15minTrial.PD;
+window=5;
+
+<span class="comment">%Setting up the GUI of noisy figure one and moving it to the north center.</span>
+fOne = figure(<span class="string">'Name'</span>,<span class="string">'Noisy'</span>,<span class="string">'NumberTitle'</span>,<span class="string">'off'</span>);
+movegui(fOne,<span class="string">'center'</span>);
+movegui(fOne,<span class="string">'north'</span>);
+
+<span class="comment">%Setting up the GUI of cleaned figure two and moving it to the center</span>
+<span class="comment">%south.</span>
+fTwo = figure(<span class="string">'Name'</span>,<span class="string">'Clean'</span>,<span class="string">'NumberTitle'</span>,<span class="string">'off'</span>);
+movegui(fTwo,<span class="string">'center'</span>);
+movegui(fTwo,<span class="string">'south'</span>);
+
+<span class="comment">%Pausing to allow for the movements to take place before the information is</span>
+<span class="comment">%ploted.</span>
+pause(.2);
+
+<span class="comment">%Setting a counter of 12 so it will go through 12 subplots.</span>
+<span class="keyword">for</span> counter = 01:12
+
+    dataA = data(:,counter); <span class="comment">%Looping through each row for the 12 columns.</span>
+    figure(1)
+    subplot (3,4,counter),plot((dataA),<span class="string">'color'</span>, <span class="string">'b'</span>) <span class="comment">%Making the color blue for the sake of UI since the STD is now red.</span>
+    title (sprintf(<span class="string">"PD %d"</span>,counter))
+    xlabel (<span class="string">'ISI #'</span>)
+    ylabel (<span class="string">'ISI (s)'</span>)
+    axis ([0,500,0.8,1.2])
+    hold <span class="string">on</span>
+
+    <span class="comment">%Pre allocating variables to speed up computer processing time. Tic Toc</span>
+    Me = zeros(length(dataA), 1);
+    StandardD1 = zeros(length(dataA), 1);
+    StandardD2 = zeros(length(dataA), 1);
+    Plus2 = zeros(length(dataA), 1);
+    Minus2 = zeros(length(dataA), 1);
+
+    <span class="comment">%Taking every single row data, ploting the mean, the std, and then</span>
+    <span class="comment">%setting up the +2 and -2 std for future use.</span>
+    <span class="keyword">for</span> i = 2:length(dataA) - 1
+        Me(i) = mean(dataA(i - 1:i + 1));
+        StandardD1(i) = std(dataA(i - 1:i + 1));
+        StandardD2(i) = StandardD1(i)+StandardD1(i);
+        Plus2(i)=Me(i)+StandardD2(i);
+        Minus2(i)=Me(i)-StandardD2(i);
+    <span class="keyword">end</span>
+
+    <span class="comment">%With the loop done, now going to plot each one. Setting the STD to 1</span>
+    <span class="comment">%for the sake of UI. Setting it to red for the assignment.</span>
+    <span class="comment">%Setting the color of the mean as green as previous, taking away the 3</span>
+    <span class="comment">%size for UI and it over pollutes the information with that given size.</span>
+
+    subplot(3,4,counter),plot(Plus2, <span class="string">'o'</span>,<span class="string">'MarkerSize'</span>,1, <span class="string">'MarkerEdgeColor'</span>,<span class="string">'red'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'red'</span>);
+    subplot(3,4,counter),plot(Minus2, <span class="string">'o'</span>,<span class="string">'MarkerSize'</span>,1, <span class="string">'MarkerEdgeColor'</span>,<span class="string">'red'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'red'</span>);
+    subplot(3,4,counter),plot((Me),<span class="string">'color'</span>,<span class="string">'g'</span>);
+
+
+<span class="keyword">end</span>
+saveas(gcf, <span class="string">'FosterRobert_PartTwo_Nois'</span>, <span class="string">'jpg'</span>); <span class="comment">%Saving the data to a jpg</span>
+
+<span class="comment">%Setting up to clean the previous data.</span>
+<span class="keyword">for</span> counter2 = 01:12
+
+    dataB = data(:,counter2);
+    figure(2)
+    meanSpeed = movmean(dataB,window); <span class="comment">%Creating the mean speed at which the window is moving.</span>
+    subplot (3,4,counter2),plot((meanSpeed),<span class="string">'color'</span>, <span class="string">'b'</span>) <span class="comment">%Ploting the original data with a speed of 5</span>
+    title (sprintf(<span class="string">"PD %d"</span>,counter2))
+    xlabel (<span class="string">'ISI #'</span>)
+    ylabel (<span class="string">'ISI (s)'</span>)
+    axis ([0,500,0.8,1.2])
+
+    hold <span class="string">on</span>
+
+    <span class="comment">%Preallocating memory to use for the for loop. Tic Toc</span>
+    cleanedMe = zeros(length(dataB), 1);
+    cleanedStandardD = zeros(length(dataB), 1);
+    cleaned2StandardD = zeros(length(dataB), 1);
+    cleanedPlus2 = zeros(length(dataB), 1);
+    cleanedMinus2 = zeros(length(dataB), 1);
+
+    <span class="comment">%For loop, saving every mean along moving data, every std along moving</span>
+    <span class="comment">%data, every std along moving data. Saving the +2 and -2 std for the</span>
+    <span class="comment">%data.</span>
+    <span class="keyword">for</span> i = 2:length(dataB) - 1
+        cleanedMe(i) = mean(dataB(i - 1:i + 1));
+        cleanedStandardD(i) = std(dataB(i - 1:i + 1));
+        cleaned2StandardD(i) = cleanedStandardD(i)+cleanedStandardD(i);
+        cleanedPlus2(i)=cleanedMe(i)+cleaned2StandardD(i);
+        cleanedMinus2(i)=cleanedMe(i)-cleaned2StandardD(i);
+    <span class="keyword">end</span>
+
+    <span class="comment">%Once it's gone through the for loop and the std +2 and -2 have been</span>
+    <span class="comment">%applied, going to now use movmean to move the cleaned version</span>
+    <span class="comment">%filtering it for each variable.</span>
+    cleanedMeMove = movmean(cleanedMe,window);
+    cleaned1StandardDMove = movmean(cleanedStandardD,window);
+    cleaned2StandardDMove = movmean( cleaned2StandardD,window);
+    cleanedPlus2Move = movmean(cleanedPlus2,window);
+    cleanedMinus2Move = movmean(cleanedMinus2,window);
+
+    <span class="comment">%Taking the variables and plotting them. Since color is red for the</span>
+    <span class="comment">%std, made the plot blue for the sake of ui, while keeping the color</span>
+    <span class="comment">%green for the mean. Shrinking the std to 1 for the sake of visual,</span>
+    <span class="comment">%taking away the 3 on the mean for the sake of ui and visual aesthetics</span>
+    subplot(3,4,counter2),plot(cleanedPlus2Move, <span class="string">'o'</span>,<span class="string">'MarkerSize'</span>,1, <span class="string">'color'</span>,<span class="string">'red'</span>);
+    subplot(3,4,counter2),plot(cleanedMinus2Move, <span class="string">'o'</span>,<span class="string">'MarkerSize'</span>,1, <span class="string">'color'</span>,<span class="string">'red'</span>);
+    subplot(3,4,counter2),plot((cleanedMeMove),<span class="string">'color'</span>,<span class="string">'g'</span>);
+
+<span class="keyword">end</span>
+saveas(gcf, <span class="string">'FosterRobert_PartTwo_Cleaned'</span>, <span class="string">'jpg'</span>); <span class="comment">%Saving the data to a JPG</span>
+</pre><img vspace="5" hspace="5" src="FosterRobert_Assignment7_PartTwo_01.png" alt=""> <img vspace="5" hspace="5" src="FosterRobert_Assignment7_PartTwo_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%Assignment : Assignment 7 part two
+%Author : Robert J. Foster
+%Date : October 12th, 2019
+%Resources : Matlab for Engineers Book, www.mathworks.com/help
+%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html
+%A program that takes the data along constant means and std then plots it
+%on the first gui. Once this is plotted it will then clean it up with a
+%window of 5 and print it in a new gui. Adding a std of 2 above and below
+%each recorded mean.
+%legend({'Noise','+2 STD','Mean','-2 STD'},'AutoUpdate','off','Location','bestoutside','Position',[.0 .4 .2 .4],'color','none');
+
+
+
+
+
+%Closing the data, loading the data to reduce on tic toc time, setting data
+%to data, setting the window movement time by 5.
+close all
+load('E:\Winter 2019 Semester\Matlab2200\Assignment6\Supplementary Data S1.mat');
+data = Data.StrideTimeIntervals_15minTrial.PD;
+window=5;
+
+%Setting up the GUI of noisy figure one and moving it to the north center. 
+fOne = figure('Name','Noisy','NumberTitle','off');
+movegui(fOne,'center');
+movegui(fOne,'north');
+
+%Setting up the GUI of cleaned figure two and moving it to the center
+%south. 
+fTwo = figure('Name','Clean','NumberTitle','off');
+movegui(fTwo,'center');
+movegui(fTwo,'south');
+
+%Pausing to allow for the movements to take place before the information is
+%ploted. 
+pause(.2);
+
+%Setting a counter of 12 so it will go through 12 subplots. 
+for counter = 01:12
+    
+    dataA = data(:,counter); %Looping through each row for the 12 columns. 
+    figure(1)
+    subplot (3,4,counter),plot((dataA),'color', 'b') %Making the color blue for the sake of UI since the STD is now red. 
+    title (sprintf("PD %d",counter))
+    xlabel ('ISI #')
+    ylabel ('ISI (s)')
+    axis ([0,500,0.8,1.2])
+    hold on
+    
+    %Pre allocating variables to speed up computer processing time. Tic Toc
+    Me = zeros(length(dataA), 1);
+    StandardD1 = zeros(length(dataA), 1);
+    StandardD2 = zeros(length(dataA), 1);
+    Plus2 = zeros(length(dataA), 1);
+    Minus2 = zeros(length(dataA), 1);
+    
+    %Taking every single row data, ploting the mean, the std, and then
+    %setting up the +2 and -2 std for future use. 
+    for i = 2:length(dataA) - 1
+        Me(i) = mean(dataA(i - 1:i + 1));
+        StandardD1(i) = std(dataA(i - 1:i + 1));
+        StandardD2(i) = StandardD1(i)+StandardD1(i);
+        Plus2(i)=Me(i)+StandardD2(i);
+        Minus2(i)=Me(i)-StandardD2(i);
+    end
+    
+    %With the loop done, now going to plot each one. Setting the STD to 1
+    %for the sake of UI. Setting it to red for the assignment.
+    %Setting the color of the mean as green as previous, taking away the 3
+    %size for UI and it over pollutes the information with that given size.
+    
+    subplot(3,4,counter),plot(Plus2, 'o','MarkerSize',1, 'MarkerEdgeColor','red','MarkerFaceColor','red');
+    subplot(3,4,counter),plot(Minus2, 'o','MarkerSize',1, 'MarkerEdgeColor','red','MarkerFaceColor','red');
+    subplot(3,4,counter),plot((Me),'color','g');
+    
+    
+end
+saveas(gcf, 'FosterRobert_PartTwo_Nois', 'jpg'); %Saving the data to a jpg
+
+%Setting up to clean the previous data. 
+for counter2 = 01:12
+    
+    dataB = data(:,counter2);
+    figure(2)
+    meanSpeed = movmean(dataB,window); %Creating the mean speed at which the window is moving. 
+    subplot (3,4,counter2),plot((meanSpeed),'color', 'b') %Ploting the original data with a speed of 5
+    title (sprintf("PD %d",counter2))
+    xlabel ('ISI #')
+    ylabel ('ISI (s)')
+    axis ([0,500,0.8,1.2])
+ 
+    hold on
+    
+    %Preallocating memory to use for the for loop. Tic Toc
+    cleanedMe = zeros(length(dataB), 1);
+    cleanedStandardD = zeros(length(dataB), 1);
+    cleaned2StandardD = zeros(length(dataB), 1);
+    cleanedPlus2 = zeros(length(dataB), 1);
+    cleanedMinus2 = zeros(length(dataB), 1);
+    
+    %For loop, saving every mean along moving data, every std along moving
+    %data, every std along moving data. Saving the +2 and -2 std for the
+    %data. 
+    for i = 2:length(dataB) - 1
+        cleanedMe(i) = mean(dataB(i - 1:i + 1));
+        cleanedStandardD(i) = std(dataB(i - 1:i + 1));
+        cleaned2StandardD(i) = cleanedStandardD(i)+cleanedStandardD(i);
+        cleanedPlus2(i)=cleanedMe(i)+cleaned2StandardD(i);
+        cleanedMinus2(i)=cleanedMe(i)-cleaned2StandardD(i);
+    end
+    
+    %Once it's gone through the for loop and the std +2 and -2 have been
+    %applied, going to now use movmean to move the cleaned version
+    %filtering it for each variable. 
+    cleanedMeMove = movmean(cleanedMe,window);
+    cleaned1StandardDMove = movmean(cleanedStandardD,window);
+    cleaned2StandardDMove = movmean( cleaned2StandardD,window);
+    cleanedPlus2Move = movmean(cleanedPlus2,window);
+    cleanedMinus2Move = movmean(cleanedMinus2,window);
+    
+    %Taking the variables and plotting them. Since color is red for the
+    %std, made the plot blue for the sake of ui, while keeping the color
+    %green for the mean. Shrinking the std to 1 for the sake of visual,
+    %taking away the 3 on the mean for the sake of ui and visual aesthetics
+    subplot(3,4,counter2),plot(cleanedPlus2Move, 'o','MarkerSize',1, 'color','red');
+    subplot(3,4,counter2),plot(cleanedMinus2Move, 'o','MarkerSize',1, 'color','red');
+    subplot(3,4,counter2),plot((cleanedMeMove),'color','g');   
+    
+end
+saveas(gcf, 'FosterRobert_PartTwo_Cleaned', 'jpg'); %Saving the data to a JPG
+
+##### SOURCE END #####
+--></body></html>

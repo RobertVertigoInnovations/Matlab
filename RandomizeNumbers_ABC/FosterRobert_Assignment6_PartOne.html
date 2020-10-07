@@ -1,0 +1,171 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>FosterRobert_Assignment6_PartOne</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-04"><meta name="DC.source" content="FosterRobert_Assignment6_PartOne.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%Assignment : Assignment 6 part one</span>
+<span class="comment">%Description A program that goes through 12 subplots, then determines their</span>
+<span class="comment">%mean and posts it.</span>
+<span class="comment">%Author : Robert J. Foster</span>
+<span class="comment">%Date : October 4th, 2019</span>
+<span class="comment">%Resources : Matlab for Engineers Book, www.mathworks.com/help</span>
+<span class="comment">%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html</span>
+
+<span class="comment">%loading the data, setting the data to a variable. Going through a counter</span>
+<span class="comment">%of 12, the counter will work through the file variable, then will plot</span>
+<span class="comment">%each one, following with a pause for cosmetic view *for the user to absorb</span>
+<span class="comment">%the information* followed by the mean in the same style. While printing in</span>
+<span class="comment">%the command window of what was ploted then when it's mean is ploted.</span>
+<span class="comment">%Ending with saving the image for the ability to update the data file.</span>
+load(<span class="string">'Supplementary Data S1.mat'</span>);
+dataSetAssignment = Data.StrideTimeIntervals_15minTrial.PD;
+<span class="keyword">for</span> counter = 01:12
+a = dataSetAssignment(:,counter);
+figure(1), pause(.8)
+subplot (3,4,counter),plot((a),<span class="string">'color'</span>, <span class="string">'r'</span>)
+title (sprintf(<span class="string">"PD %d"</span>,counter))
+xlabel (<span class="string">'ISI #'</span>)
+ylabel (<span class="string">'ISI (s)'</span>)
+axis ([0,500,0.8,1.2])
+fprintf(<span class="string">"\nPD %02d done\n"</span>, counter)
+hold <span class="string">on</span>
+pause(.5)
+fprintf(<span class="string">"Drawing %02d's mean\n"</span>,counter)
+fplot(mean(a),<span class="string">'LineWidth'</span>, 3, <span class="string">'color'</span>,<span class="string">'g'</span>);
+<span class="keyword">end</span>
+saveas(gcf, <span class="string">'15minTrial'</span>, <span class="string">'jpg'</span>);
+</pre><pre class="codeoutput">
+PD 01 done
+Drawing 01's mean
+
+PD 02 done
+Drawing 02's mean
+
+PD 03 done
+Drawing 03's mean
+
+PD 04 done
+Drawing 04's mean
+
+PD 05 done
+Drawing 05's mean
+
+PD 06 done
+Drawing 06's mean
+
+PD 07 done
+Drawing 07's mean
+
+PD 08 done
+Drawing 08's mean
+
+PD 09 done
+Drawing 09's mean
+
+PD 10 done
+Drawing 10's mean
+
+PD 11 done
+Drawing 11's mean
+
+PD 12 done
+Drawing 12's mean
+</pre><img vspace="5" hspace="5" src="FosterRobert_Assignment6_PartOne_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%Assignment : Assignment 6 part one
+%Description A program that goes through 12 subplots, then determines their
+%mean and posts it. 
+%Author : Robert J. Foster
+%Date : October 4th, 2019
+%Resources : Matlab for Engineers Book, www.mathworks.com/help
+%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html
+
+%loading the data, setting the data to a variable. Going through a counter
+%of 12, the counter will work through the file variable, then will plot
+%each one, following with a pause for cosmetic view *for the user to absorb
+%the information* followed by the mean in the same style. While printing in
+%the command window of what was ploted then when it's mean is ploted.
+%Ending with saving the image for the ability to update the data file. 
+load('Supplementary Data S1.mat');
+dataSetAssignment = Data.StrideTimeIntervals_15minTrial.PD;
+for counter = 01:12
+a = dataSetAssignment(:,counter);
+figure(1), pause(.8)
+subplot (3,4,counter),plot((a),'color', 'r')
+title (sprintf("PD %d",counter))
+xlabel ('ISI #')
+ylabel ('ISI (s)')
+axis ([0,500,0.8,1.2])
+fprintf("\nPD %02d done\n", counter)
+hold on
+pause(.5)
+fprintf("Drawing %02d's mean\n",counter)
+fplot(mean(a),'LineWidth', 3, 'color','g');
+end
+saveas(gcf, '15minTrial', 'jpg'); 
+
+##### SOURCE END #####
+--></body></html>

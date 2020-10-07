@@ -1,0 +1,299 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>FosterRobert_Assignment7_PartOne</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-13"><meta name="DC.source" content="FosterRobert_Assignment7_PartOne.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%Assignment : Assignment 7 part one</span>
+<span class="comment">%Author : Robert J. Foster</span>
+<span class="comment">%Date : October 12th, 2019</span>
+<span class="comment">%Resources : Matlab for Engineers Book, www.mathworks.com/help</span>
+<span class="comment">%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html</span>
+<span class="comment">%A program that randomizes numbers and sets them to variables A,B,C</span>
+<span class="comment">%for B it's taking every value that's greater than 150 and setting it to</span>
+<span class="comment">%NaN.</span>
+<span class="comment">%for C going to set every odd number to inf. So it all isn't in one giant</span>
+<span class="comment">%column, going to do a mod setup. Instead of the mod going to use the</span>
+<span class="comment">%remainder (rem), once we've determined what's the even and odds. Going to</span>
+<span class="comment">%set the odds to 'inf', once that's been accomplished, going to put the</span>
+<span class="comment">%file back together with the evens and odds so it sustained the 1000x1000,</span>
+<span class="comment">%with the odds first, then evens proceeding. Since there's more odds &gt;</span>
+<span class="comment">%evens or more evens&gt; odds, means we can't use the append or the repmap or</span>
+<span class="comment">%the catenation. Going to have to create own way of doing it and put them</span>
+<span class="comment">%all together in one giant column, then use the reshape function to bring</span>
+<span class="comment">%it back to it's 1000x1000 setup with new values of inf and orginzation</span>
+<span class="comment">%setup.</span>
+
+A = randi([100 200],1000,1000); <span class="comment">%creating a random 1000x1000 between 100-200</span>
+
+<span class="comment">%B to NaN greater than 150</span>
+B = A;
+B(B&gt;150)=NaN;
+
+<span class="comment">%finding the odds and evens, changing value of odds, putting everything</span>
+<span class="comment">%back together</span>
+odds = find(rem(A,2)==1); <span class="comment">%remainder (similar to modular) Odds, those with the remainder of 1</span>
+evens = find(rem(A,2)==0);<span class="comment">%remainder (similar to modular) Evens, those with the remainder of 0</span>
+
+tempOdds = A(odds); <span class="comment">%Putting the linear back together and matching it with it's value Odds</span>
+tempEvens = A(evens);<span class="comment">%Putting the linear back together and matching it with it's value Even</span>
+
+
+<span class="keyword">for</span> i = 1:numel(odds) <span class="comment">%Making value of odds to inf, using numel to count how many numbers are in odds</span>
+    tempOdds(i)=tempOdds(i);
+    tempOdds(i)=inf;
+<span class="keyword">end</span>
+
+phC =[tempOdds;tempEvens];<span class="comment">% attatching odds and evens together since their different values and can't be cat,repmat,append</span>
+C=reshape(phC,[1000,1000]);<span class="comment">%reshaping array into a 1000x1000 matrix</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="comment">% for j = 1:numel(b)</span>
+<span class="comment">%     c(j) = c(j);</span>
+<span class="comment">% end</span>
+
+<span class="comment">%o = repmat(tempOdds,10,10);</span>
+<span class="comment">%</span>
+
+
+
+
+<span class="comment">% a = randi([100 200],1000,1000);</span>
+<span class="comment">% b = a;</span>
+<span class="comment">%</span>
+<span class="comment">% odds = find(rem(a,2)==1);</span>
+<span class="comment">% evens = find(rem(a,2)==0);</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% tempOdds = a(odds);</span>
+<span class="comment">% tempEvens = a(evens);</span>
+<span class="comment">%</span>
+<span class="comment">% c = zeros(size(a));</span>
+<span class="comment">% d = zeros(size(a));</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% verifyEvens = numel(evens);</span>
+<span class="comment">% verifyOdds = numel(odds);</span>
+<span class="comment">%</span>
+<span class="comment">% for i = 1:numel(odds)</span>
+<span class="comment">%     c(i) = tempOdds(i);</span>
+<span class="comment">%</span>
+<span class="comment">% end</span>
+<span class="comment">% for j =1:numel(evens)</span>
+<span class="comment">%     d(j)= tempEvens(j);</span>
+<span class="comment">% end</span>
+<span class="comment">%</span>
+<span class="comment">% d( ~any(d,2), : ) = [];  %clears all 0's from rows</span>
+<span class="comment">% d( :, ~any(d,1) ) = [];  %clears all 0's from columns</span>
+<span class="comment">%</span>
+<span class="comment">% c( ~any(c,2), : ) = [];  %clears all 0's from rows</span>
+<span class="comment">% c( :, ~any(c,1) ) = [];  %clears all 0's from columns</span>
+<span class="comment">%</span>
+<span class="comment">% if i == verifyOdds</span>
+<span class="comment">%     fprintf("\n%i odd numbers before\n%i odd numbers after\n\n",verifyOdds,i);</span>
+<span class="comment">% else</span>
+<span class="comment">%     fprintf("The number of odds to the original doesn't match");</span>
+<span class="comment">% end</span>
+<span class="comment">%</span>
+<span class="comment">% if j == verifyEvens</span>
+<span class="comment">%     fprintf("%i even numbers before\n%i odd numbers after\n\n",verifyEvens,j);</span>
+<span class="comment">% else</span>
+<span class="comment">%     fprintf("The number of evens to the original doesn't match");</span>
+<span class="comment">% end</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%Assignment : Assignment 7 part one
+%Author : Robert J. Foster
+%Date : October 12th, 2019
+%Resources : Matlab for Engineers Book, www.mathworks.com/help
+%Commenting Style C doxygen : http://www.doxygen.nl/manual/docblocks.html
+%A program that randomizes numbers and sets them to variables A,B,C
+%for B it's taking every value that's greater than 150 and setting it to
+%NaN.
+%for C going to set every odd number to inf. So it all isn't in one giant
+%column, going to do a mod setup. Instead of the mod going to use the
+%remainder (rem), once we've determined what's the even and odds. Going to
+%set the odds to 'inf', once that's been accomplished, going to put the
+%file back together with the evens and odds so it sustained the 1000x1000,
+%with the odds first, then evens proceeding. Since there's more odds >
+%evens or more evens> odds, means we can't use the append or the repmap or
+%the catenation. Going to have to create own way of doing it and put them
+%all together in one giant column, then use the reshape function to bring
+%it back to it's 1000x1000 setup with new values of inf and orginzation
+%setup. 
+
+A = randi([100 200],1000,1000); %creating a random 1000x1000 between 100-200
+
+%B to NaN greater than 150
+B = A;
+B(B>150)=NaN;
+
+%finding the odds and evens, changing value of odds, putting everything
+%back together
+odds = find(rem(A,2)==1); %remainder (similar to modular) Odds, those with the remainder of 1
+evens = find(rem(A,2)==0);%remainder (similar to modular) Evens, those with the remainder of 0
+
+tempOdds = A(odds); %Putting the linear back together and matching it with it's value Odds
+tempEvens = A(evens);%Putting the linear back together and matching it with it's value Even
+
+
+for i = 1:numel(odds) %Making value of odds to inf, using numel to count how many numbers are in odds
+    tempOdds(i)=tempOdds(i);
+    tempOdds(i)=inf;
+end
+
+phC =[tempOdds;tempEvens];% attatching odds and evens together since their different values and can't be cat,repmat,append
+C=reshape(phC,[1000,1000]);%reshaping array into a 1000x1000 matrix
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% for j = 1:numel(b)
+%     c(j) = c(j);
+% end
+
+%o = repmat(tempOdds,10,10);
+% 
+
+
+
+
+% a = randi([100 200],1000,1000);
+% b = a;
+% 
+% odds = find(rem(a,2)==1);
+% evens = find(rem(a,2)==0);
+% 
+% 
+% tempOdds = a(odds);
+% tempEvens = a(evens);
+% 
+% c = zeros(size(a));
+% d = zeros(size(a));
+% 
+% 
+% verifyEvens = numel(evens);
+% verifyOdds = numel(odds);
+% 
+% for i = 1:numel(odds)
+%     c(i) = tempOdds(i);
+% 
+% end
+% for j =1:numel(evens)
+%     d(j)= tempEvens(j);
+% end
+% 
+% d( ~any(d,2), : ) = [];  %clears all 0's from rows
+% d( :, ~any(d,1) ) = [];  %clears all 0's from columns
+% 
+% c( ~any(c,2), : ) = [];  %clears all 0's from rows
+% c( :, ~any(c,1) ) = [];  %clears all 0's from columns
+% 
+% if i == verifyOdds
+%     fprintf("\n%i odd numbers before\n%i odd numbers after\n\n",verifyOdds,i);
+% else
+%     fprintf("The number of odds to the original doesn't match");
+% end
+% 
+% if j == verifyEvens
+%     fprintf("%i even numbers before\n%i odd numbers after\n\n",verifyEvens,j);
+% else
+%     fprintf("The number of evens to the original doesn't match");
+% end
+% 
+% 
+% 
+
+
+
+##### SOURCE END #####
+--></body></html>
